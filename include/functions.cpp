@@ -148,8 +148,9 @@ namespace hash_table {
 						return true;
 					}
 					if (index == hash(key)) return false;
+					i++;
 				}
-				i++;
+				
 			}
 		}
 
@@ -161,9 +162,24 @@ namespace hash_table {
 			size_t cnt = 0;
 			for (auto& c : _data) {
 				if (c.state == exist) {
-					if (hash(c.key) == hash(key)) cnt++;
+					if ((c.key) == (key)) cnt++;
 				}
 			}
 			return cnt;
 		}
 	};
+
+	int CountSame(vector<int> arr) {
+		UnorderedMap <int, int> a(arr.size()*2);
+		UnorderedMap <int, int> b(arr.size() * 2);
+		for (auto& c : arr) {
+			if (a.search(c) != nullptr) {
+				b.insert(c, 1);
+			}
+			else {
+				a.insert(c, 1);
+			}
+		}
+		return arr.size() - a.count() + b.count();
+	}
+}
